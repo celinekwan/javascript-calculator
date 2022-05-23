@@ -46,20 +46,27 @@ const resetVars = () => {
 }
 
 document.addEventListener('click', function(event) {
-    if (event.target.matches('.all-clear')) {
+    if (event.target.matches('#all-clear')) {
         clearDisplay();
         resetVars();
     }
+
     if (event.target.matches('#add')) {
+        if  (display.innerText === '') {
+            num1 = result;
+            result = 0;
+            sign = "+";
+            clearDisplay();
+        }
         // 2 args, 1 operator (e.g. (0+)1+1 = 2)
-        if (num1 === 0) {
+        else if (num1 === 0) {
             num1 = getDispNum();
             sign = "+";
             clearDisplay();
         }
         // ------------------
         // 3 args, 2 operators (e.g. 1+1+1 = 3 )
-        if (num1 !== 0) {
+        else if (num1 !== 0) {
             num2 = getDispNum();
             num1 = operator(sign,num1,num2);
             clearDisplay();
@@ -67,21 +74,97 @@ document.addEventListener('click', function(event) {
         // ------------------
         sign = "+";
     }
+
+    if (event.target.matches('#subtract')) {
+        if  (display.innerText === '') {
+            num1 = result;
+            result = 0;
+            sign = "-";
+            clearDisplay();
+        }
+        // 2 args, 1 operator (e.g. (0+)1+1 = 2)
+        else if (num1 === 0) {
+            num1 = getDispNum();
+            sign = "-";
+            clearDisplay();
+        }
+        // ------------------
+        // 3 args, 2 operators (e.g. 1+1+1 = 3 )
+        else if (num1 !== 0) {
+            num2 = getDispNum();
+            num1 = operator(sign,num1,num2);
+            clearDisplay();
+        }
+        // ------------------
+        sign = "-";
+    }
+
+    if (event.target.matches('#multiply')) {
+        if  (display.innerText === '') {
+            num1 = result;
+            result = 0;
+            sign = "*";
+            clearDisplay();
+        }
+        // 2 args, 1 operator (e.g. (0*)1*1 = 2)
+        else if (num1 === 0) {
+            num1 = getDispNum();
+            sign = "*";
+            clearDisplay();
+        }
+        // ------------------
+        // 3 args, 2 operators (e.g. 1+1+1 = 3 )
+        else if (num1 !== 0) {
+            num2 = getDispNum();
+            num1 = operator(sign,num1,num2);
+            clearDisplay();
+        }
+        // ------------------
+        sign = "*";
+    }
+
+    if (event.target.matches('#divide')) {
+        if  (display.innerText === '') {
+            num1 = result;
+            result = 0;
+            sign = "/";
+            clearDisplay();
+        }
+        // 2 args, 1 operator (e.g. (0*)1*1 = 2)
+        else if (num1 === 0) {
+            num1 = getDispNum();
+            sign = "/";
+            clearDisplay();
+        }
+        // ------------------
+        // 3 args, 2 operators (e.g. 1+1+1 = 3 )
+        else if (num1 !== 0) {
+            num2 = getDispNum();
+            num1 = operator(sign,num1,num2);
+            clearDisplay();
+        }
+        // ------------------
+        sign = "/";
+    }
+
     if (event.target.matches("#equals")) {
         // 2 args, 1 operator (e.g. 1+1 = 2)
         num2 = getDispNum();
-        
+        clearDisplay();
         // ------------------
         // 3 args, 2 operators (e.g. 1+1+1 = 3 )
             // num2 = getDispNum();
             // clearDisplay();
         // ------------------
         result = operator(sign,num1,num2);
-        clearDisplay();
 
         console.log(result);
         
-        resetVars();
+        // resetVars, but keep result    
+        num1 = 0;
+        sign = '';
+        num2 = 0;
+
     }
 
 
